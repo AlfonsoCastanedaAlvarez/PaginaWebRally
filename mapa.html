@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rally de Diplomacia - Selección de Nivel</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body class="no-grid page-selector">
+
+  <!-- Canvas animado de fondo -->
+  <canvas id="bg-canvas"></canvas>
+
+  <main class="levels-wrapper">
+    <!-- Encabezado -->
+    <header class="levels-header" id="main-header">
+      <h1 class="pixel-title">¡SELECCIONA UN NIVEL!</h1>
+      <p class="pixel-subtitle">ELIGE UNA ZONA PARA EXPLORAR LOS MONUMENTOS</p>
+    </header>
+
+    <!-- Grid de las 4 Cards Principales -->
+    <div class="cards-grid-4" id="cards-grid">
+      
+      <!-- Card 1: Chapultepec -->
+      <div class="level-card card-chapultepec" onclick="openLevel('chapultepec')">
+        <img src="assets/totem.jpg" alt="Chapultepec" class="card-bg-img">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <span class="level-tag">NIVEL 01</span>
+          <h2>CHAPULTEPEC</h2>
+          <p class="click-hint">CLICK PARA EXPLORAR</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Reforma -->
+      <div class="level-card card-reforma" onclick="openLevel('reforma')">
+        <img src="assets/campana.jpg" alt="Reforma" class="card-bg-img">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <span class="level-tag">NIVEL 02</span>
+          <h2>REFORMA</h2>
+          <p class="click-hint">CLICK PARA EXPLORAR</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Centro Histórico -->
+      <div class="level-card card-centro" onclick="openLevel('centro')">
+        <img src="assets/reloj-otomano.jpg" alt="Centro Histórico" class="card-bg-img">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <span class="level-tag">NIVEL 03</span>
+          <h2>CENTRO HISTÓRICO</h2>
+          <p class="click-hint">CLICK PARA EXPLORAR</p>
+        </div>
+      </div>
+
+      <!-- Card 4: Coyoacán -->
+      <div class="level-card card-coyoacan" onclick="openLevel('coyoacan')">
+        <img src="assets/trotsky.jpg" alt="Coyoacán" class="card-bg-img">
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <span class="level-tag">NIVEL 04</span>
+          <h2>COYOACÁN</h2>
+          <p class="click-hint">CLICK PARA EXPLORAR</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTÓN CIRCULAR BONUS (Centrado simétricamente) -->
+    <div class="bonus-btn-wrapper" id="bonus-wrapper">
+      <button class="bonus-circle-btn" onclick="openBonusModal(event)">
+        ★ BONUS ★
+      </button>
+    </div>
+
+    <!-- VISTA EXPANDIDA INTERNA DE NIVELES -->
+    <div id="expanded-view" class="expanded-view hidden">
+      <h2 id="expanded-title" class="expanded-level-title"></h2>
+      <div id="places-container" class="places-grid"></div>
+      
+      <button class="btn-retro-back" onclick="closeLevel()">
+        &lt; REGRESAR AL SELECTOR DE NIVELES
+      </button>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer class="footer-nav" id="footer-nav">
+      <a href="index.html" class="btn-home">&lt; VOLVER AL INICIO</a>
+    </footer>
+  </main>
+
+  <!-- MODAL FLOTANTE (NIVEL BONUS) -->
+  <div id="bonus-modal" class="bonus-modal-overlay hidden" onclick="closeBonusModal()">
+    <div class="bonus-card-container" onclick="event.stopPropagation()">
+      <div class="bonus-card-header">
+        <span class="bonus-badge">LEVEL BONUS</span>
+        <h2>Murales portugueses del Metro</h2>
+      </div>
+
+      <!-- Carrusel para 4 fotos -->
+      <div class="carousel-wrapper bonus-carousel">
+        <img id="bonus-img" src="assets/murales-portugueses.jpg" alt="Murales Portugueses" onerror="this.src='https://via.placeholder.com/400x250?text=Foto+Murales'">
+        <button class="carousel-btn prev-btn" onclick="moveBonusCarousel(-1)">&#10094;</button>
+        <button class="carousel-btn next-btn" onclick="moveBonusCarousel(1)">&#10095;</button>
+        <div class="carousel-counter"><span id="bonus-count">1</span> / 4</div>
+      </div>
+
+      <!-- Detalles con Scroll Vertical -->
+      <div class="place-details-scroll bonus-details">
+        <span class="place-tag">📍 País: Portugal, mediante el Metro de Lisboa</span>
+        <span class="place-tag year-tag">📅 Año: 1996</span>
+        <div class="history-text">
+          <p><strong>Historia y Descripción:</strong> La obra principal relacionada con esta actividad es <em>Civilización y Cultura</em>, del artista portugués José de Guimarães, instalada en la estación Chabacano (Línea 9). Fue donada por el Metro de Lisboa como gesto de intercambio cultural entre Portugal y México. El mural está realizado con piezas de cerámica coloreada y ocupa aproximadamente 120 m².</p>
+        </div>
+
+        <div class="note-btn-wrapper">
+          <button class="btn-personal-note" onclick="togglePersonalNote('bonus-note')">
+            [ 💬 NOTA PERSONAL ]
+          </button>
+          <div id="note-box-bonus-note" class="personal-note-box hidden">
+            "Los murales fue uno de los lugares que más difíciles se me hizo a pesar de qué suena fácil por estar en el metro. La verdad es que al ser una línea que se conecta con otras dos estuvo difícil encontrarlos, ya que no sabía en qué línea estaban exactamente y la verdad es que no se les da tanta importancia entonces era complicado saber cuáles eran."
+          </div>
+        </div>
+      </div>
+
+      <p class="bonus-close-hint">Toca en cualquier lugar fuera de la tarjeta para cerrar</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
