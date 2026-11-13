@@ -76,7 +76,6 @@ html, body {
   overflow-y: auto;
 }
 
-/* DISTRIBUCIÓN EQUIDISTANTE EXACTA Y COMPACTA */
 .levels-wrapper {
   position: relative;
   z-index: 2;
@@ -84,7 +83,7 @@ html, body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly; /* Espaciado idéntico en las 3 secciones */
+  justify-content: space-evenly;
   align-items: center;
   padding: 10px 20px;
 }
@@ -106,10 +105,9 @@ html, body {
   font-size: 0.6rem;
 }
 
-/* GRID DE CARDS PRINCIPALES */
 .cards-grid-4 {
   width: 94vw;
-  height: 56vh; /* Altura optimizada para acortar las distancias verticales */
+  height: 56vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 18px;
@@ -492,6 +490,16 @@ html, body {
   border-left: 3px solid var(--yellow-arcade);
   color: #ffe680;
   border-radius: 4px;
+}
+
+.personal-note-img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 2px solid var(--yellow-arcade);
+  margin-top: 10px;
+  display: block;
 }
 
 /* TEMAS POR CADA NIVEL */
